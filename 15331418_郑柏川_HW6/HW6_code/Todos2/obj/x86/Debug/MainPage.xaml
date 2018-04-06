@@ -1,0 +1,152 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="Todos2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Todos2"
+    xmlns:model="using:Todos2.Models"
+    xmlns:con="using:Todos2.converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <con:OpacityAndCheckbox x:Key="StringConverter"/>
+        <con:BoolToValue x:Key="BoolConverter" />
+        <con:ImageToUri x:Key="imageConverter" />
+    </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:ConnectionId='2' x:Name="AddAppBarButton" Icon="Add" Label="Add"                              />
+            <AppBarButton x:ConnectionId='3' x:Name="Tile" Icon="WebCam" Label="Tile"                              />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:ConnectionId='4' x:Name="All" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:ConnectionId='5' x:Name="VisualStateGroup">
+                <VisualState x:ConnectionId='6' x:Name="VisualStateMin0">
+                    <VisualState.Setters>
+                        <Setter Target="InlineToDoItemViewGrid.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="ToDoListView.(Grid.ColumnSpan)" Value="2"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:ConnectionId='7' x:Name="VisualStateMin800">
+                    <VisualState.Setters>
+                        <Setter Target="AddAppBarButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='17'  Grid.Row="0" x:Name="textBlock" Text="Todos" Style="{StaticResource HeaderTextBlockStyle}"/>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:ConnectionId='24' x:Name="SearchContent" Grid.Column="0" Height="30"></TextBox>
+                <Button x:ConnectionId='25' x:Name="SearchButton" Grid.Column="1" Height="30" Content="Search"                            Margin="10,0,20,0" HorizontalAlignment="Stretch"></Button>
+            </Grid>
+            <ScrollViewer Grid.Row="1" Margin="20">
+                <ListView x:ConnectionId='18' IsItemClickEnabled="True"                          
+                                                                x:Name="ToDoListView">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate                            >
+                            <UserControl x:ConnectionId='19'>
+                                <Grid Height="100">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState x:Name="VisualState1">
+                                            <VisualState.Setters>
+                                                <Setter Target="imgin.Visibility" Value="Collapsed"/>
+                                            </VisualState.Setters>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="1"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                        <VisualState x:Name="VisualState2">
+                                            <VisualState.Setters>
+                                                <Setter Target="imgin.Visibility" Value="Visible"/>
+                                            </VisualState.Setters>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="601"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- 只绑定了title, 其余请自己完成-->
+                                <CheckBox x:ConnectionId='20' x:Name="checkbox" Grid.Column="0" VerticalAlignment="Center" Height="32" Width="32"                                                                                      />
+                                    <Image x:ConnectionId='21' x:Name="imgin"                                                                       Grid.Column="1" Height="90" Width="90" Margin="0,3,12,7" />
+                                <TextBlock x:ConnectionId='22'                       Grid.Column="2" VerticalAlignment="Center" Foreground="Black" FontWeight="Normal" FontSize="15" LineHeight="20" TextWrapping="Wrap" />
+                                <Line Opacity="{Binding IsChecked, ElementName=checkbox, Converter={StaticResource StringConverter}}" Grid.Column="2" Stretch="Fill" Stroke="Black" StrokeThickness="2" X1="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,20,0"/>
+                                <AppBarButton Grid.Column="3" Icon="Setting" IsCompact="True" VerticalAlignment="Center">
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="Edit"/>
+                                            <MenuFlyoutItem Text="Delete"/>
+                                            <MenuFlyoutItem x:ConnectionId='23' Text="Share"                         />
+                                            </MenuFlyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+                            </Grid>
+                            </UserControl>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid x:ConnectionId='8' x:Name="InlineToDoItemViewGrid" Grid.Column="1">
+            <ScrollViewer Margin="20">
+                <StackPanel>
+
+                    <Image x:ConnectionId='9' x:Name="image_grid" Source="Assets/background.jpg" Width="350" Height="180" Margin="4" Stretch="Fill" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform ScaleX="{Binding Value, ElementName=MySlider}"
+                                        ScaleY="{Binding Value, ElementName=MySlider}"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <RelativePanel Width="350">
+                        <AppBarButton x:ConnectionId='16' x:Name="SelectPictureBtn" Icon="Pictures" Label="select" RelativePanel.AlignRightWithPanel="True"                               />
+                    </RelativePanel>
+                    <Slider x:ConnectionId='10' Padding="50,0,50,0" Minimum="0.5" Maximum="1.0" StepFrequency="0.1" x:Name="MySlider"/>
+                    <TextBox x:ConnectionId='11' x:Name="title_grid" Width="350" Header="Title" Margin="0,12,0,0" />
+                    <TextBox x:ConnectionId='12' x:Name="description_grid" Width="350" Height="96" Margin="0,12,0,0" Header="Details" />
+                    <DatePicker x:ConnectionId='13' x:Name="date_grid" Width="350" Margin="0,12,0,0" Header="Due Date" HorizontalAlignment="Center" />
+                    <RelativePanel Width="350" Margin="0,24,0,0">
+                        <Button x:ConnectionId='14' x:Name="UpdateButton" Content="Creat"                       ></Button>
+                        <Button x:ConnectionId='15' x:Name="DeleteButton" Content="Cancel"                        RelativePanel.AlignRightWithPanel="True"></Button>
+                    </RelativePanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</Page>
+

@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="Media.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Media"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:c="using:Media">
+
+    <Page.Resources>
+        <c:TimeToSlide x:Key="slide"/>
+        <c:SlideToTime x:Key="time"/>
+    </Page.Resources>
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF7BA7F6" RequestedTheme="Dark">
+            <AppBarButton x:Name="Play" Icon="Play" Click="PlayC"/>
+            <AppBarButton x:Name="Pause" Icon="Pause" Click="PauseC"/>
+            <AppBarButton x:Name="Stop" Icon="Stop" Click="StopC"/>
+            <AppBarButton x:Name="Volume" Icon="Volume" Click="AdjustVolume"/>
+            <AppBarButton x:Name="Open" Icon="Folder" Click="ChooseFile"/>
+            <AppBarButton x:Name="Fill" Icon="FullScreen" Click="FullScreen"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="Assets/timg.jpg" Width="400" Height="400" x:Name="cover" Visibility="Collapsed">
+            <Image.Transform3D>
+                <CompositeTransform3D
+                    CenterX="200"
+                    CenterY="200"
+                    RotationZ=
+                    "{Binding Value,
+                    ElementName=timelineSlider,
+                    Converter={StaticResource time},
+                    Mode=OneWay}"/>
+            </Image.Transform3D>
+        </Image>
+        <MediaElement x:Name="myMedia" IsFullWindow="false" Grid.Row="0"  AutoPlay = "False" MediaEnded="end" MediaOpened="open" Stretch="Fill" Height="Auto" MinHeight="500" Width="900"/>
+        <Slider Grid.Row="0"
+                VerticalAlignment="Bottom"
+                x:Name="timelineSlider"
+                HorizontalAlignment="Center"
+                Width = "{Binding Width, ElementName=myMedia}"
+                Value="{Binding ElementName=myMedia, Path=Position,
+            Converter={StaticResource slide}, Mode=TwoWay}"/>
+        <Slider Grid.Row="1" x:Name="volumnSlider" Margin="20,0,20,50" HorizontalAlignment="Right" VerticalAlignment="Bottom" ValueChanged="ChangeMeidaVolume" Minimum="0" Maximum="1" Value="0.5" Width="70" StepFrequency="0.1" Visibility="Collapsed"/>
+    </Grid>
+</Page>

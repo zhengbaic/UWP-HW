@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tile>
+  <visual>
+    <binding template="TileSmall" branding="none" hint-textStacking="center">
+      <image src="Assets\background.jpg" placement="background"/>
+      <text hint-style="subtitle"></text>
+    </binding>
+
+    <binding template="TileMedium" branding="Name" displayName="Todos">
+      <image src="Assets\background.jpg" placement="background"/>
+      <text hint-style="subtitle"></text>
+      <text></text>
+    </binding>
+
+    <binding template="TileWide" branding="Name" displayName="Todos">
+      <image src="Assets\background.jpg" placement="background"/>
+      <text hint-style="subtitle"></text>
+      <text></text>
+      <text></text>
+    </binding>
+  </visual>
+</tile>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tile>
+    <visual>
+
+        <binding template="TileSmall" branding="none" hint-textStacking="center">
+            <text hint-style="subtitle">title</text>
+            <text hint-style="subtitle">details</text>
+            <image src ="Assets/background.jpg" placement ="background"/>
+        </binding>
+      
+        <binding template="TileMedium"  branding="Name" displayName="Hipstame">
+            <text hint-style="caption">9:50 AM, Wednesday</text>
+            <text hint-style="captionsubtle" hint-wrap="true">263 Grove St, San Francisco, CA 94102</text>
+        </binding>
+
+        <binding template="TileWide" branding="Name" displayName="Hipstame">
+            <group>
+                <subgroup hint-weight="33">
+                    <image placement="inline" src="http://image.jpg" />
+                </subgroup>
+                <subgroup>
+                    <text hint-style="caption">9:50 AM, Wednesday</text>
+                    <text hint-style="captionsubtle" hint-wrap="true" hint-maxLines="3">263 Grove St, San Francisco, CA 94102</text>
+                </subgroup>
+            </group>
+        </binding>
+
+        <binding template="TileLarge" branding="Name" displayName="Hipstame">
+            <group>
+                <subgroup hint-weight="33">
+                    <image placement="inline" src="http://image.jpg" />
+                </subgroup>
+                <subgroup>
+                    <text hint-style="caption">9:50 AM, Wednesday</text>
+                    <text hint-style="captionsubtle" 
+       hint-wrap="true" hint-maxLines="3">263 Grove St, San Francisco, CA 94102</text>
+                </subgroup>
+            </group>
+            <image placement="inline" src="http://map.jpg"/>
+        </binding>
+    </visual>
+</tile>
+    
